@@ -36,10 +36,11 @@ summary(foot) # Cette commande vous permet d'avoir des informations sur chacune 
 
 # Questions : 
 # - Quelle est la valeur minimale de cartons jaunes pris par une équipe ?
-min_carton_rouge_par_equipe = min(foot$Rouge) # valeur = 0
+min(foot$Jaune) 
+# Réponse = 16
 # - Combien d'équipes participent à la ligue française ?
-nombre_equipes_france = sum(foot$Ligue == "France")
-nombre_equipes_france # valeur = 20
+sum(foot$Ligue == "France")
+# Réponse = 20
 
 # Diagramme en camembert de la répartition des équipes par Ligue
 eff = table(foot$Ligue)
@@ -71,16 +72,17 @@ boxplot(foot$Fautes, main = "Boîte à moustaches des Fautes", ylab = "Nombre de
 # Boxplot permet également de dessiner la boîte à moustache par modalités d'une variable qualitative (ici Ligue):
 boxplot(foot$Fautes~foot$Ligue, xlab="Ligue", ylab = "Nombre de fautes par match") # 5 boites à moustache : 1 par ligue
 # Retrouvez vous la conclusion que l'on avait fait à propos des équipes anglaises et du nb de fautes ?
-# Oui. En effet les équipes anglaises font moins de fautes comparé aux équipes des autres groupes
+# Réponse : Oui. En effet les équipes anglaises font moins de fautes comparé aux équipes des autres groupes
 
 # Essayez de la même façon d'étudier la variable DuelsAeriens en fonction de la ligue, 
 # ainsi que la variable Jaune en fonction de la ligue. Quelles conclusions pouvez vous faire ?
 boxplot(foot$DuelsAeriens~foot$Ligue, xlab="Ligue", ylab = "Nombre de duels aériens par match")
 boxplot(foot$Jaune~foot$Ligue, xlab="Ligue", ylab = "Nombre de cartons jaunes par match")
-# Duels aériens : Les équipes allemandes sont en moyenne meilleures dans les duels aériens que les équipes des autres groupes
-# Parcontre les équipes italiennes sont les plus mauvaises
-# Cartons jaunes : Les équipes espagnols prennent beaucoup trop de cartonss jaunes
-# A l'inverse, les équipes allemandes pratique un jeu beaucoup plus sain 
+# Réponse :
+#   Duels aériens : Les équipes allemandes sont en moyenne meilleures dans les duels aériens que les équipes des autres groupes
+#     Parcontre les équipes italiennes sont les plus mauvaises
+#   Cartons jaunes : Les équipes espagnols prennent beaucoup trop de cartonss jaunes
+#     A l'inverse, les équipes allemandes pratique un jeu beaucoup plus sain avec moin de cartons jaunes 
 
 # La commande cor permet de calculer la corrélation entre 2 variables, par exemple:
 cor(foot$Buts, foot$Possession)
@@ -91,10 +93,11 @@ cor(foot$Buts, foot$Possession)
 cor(foot$Buts, foot[,1:15])
 # Question : Quelle est la variable la plus corrélée à Buts ?
 # Réponse : TirsCadres avec une valeur de corrélation égale à 0.8103011
+
 # Regardez la corrélation d'une autre variable de votre choix à toutes les autres.
 cor(foot$TirsCadres, foot[,1:15])
 # Commentaire : TirsCadres est très correlé avec Tirs(0.8909303) et Buts (0.8103011). 
-# Conclusion : Les qui tirent beaucoup ont beaucoup de tirs cadrés, et donc marquent beaucoup
+# Conclusion : Les équipes qui tirent beaucoup ont beaucoup de tirs cadrés, et donc marquent beaucoup
 
 #########################################################
 ###      Deuxième partie: ACP sur ces données       #####
@@ -147,9 +150,9 @@ foot_acp$var
 # - Quelles sont les variables qui ont le plus contribué à créer l'axe 1 ? l'axe 2 ? l'axe 3 ? l'axe 4?
 # Réponse : 
 #   - Axe 1 : Possession(14.77%), PassesReuss(13.66%), TirsCadres(13.49%), Buts(12.51%), Tirs(12.08%)
-#   - Axe 2 : Fautes(24.88%), FautesSubies(22.05%), Tacles(19.46%)
-#   - Axe 3 : Jaune(25.89%), DuelsAeriens(18.64%), Interception(16.77%)
-#   - Axe 4 : Rouge(74.63%) 
+#   - Axe 2 : Fautes(24.88%), FautesSubies(22.05%), Tacles(19.46%), Interception(10.21%), HorsJeu(9.79%)   
+#   - Axe 3 : Jaune(25.89%), DuelsAeriens(18.64%), Interception(16.77%), Rouge(9.57%)     
+#   - Axe 4 : Rouge(74.63%), Jaune(14.35%)
 
 # - Comment pouvez-vous intérpréter le premier axe factoriel ? le deuxième ?
 # Réponse : 
@@ -169,12 +172,19 @@ sort(round(foot_acp$ind$contrib[,1], 2), decreasing = TRUE)
 #   Paris Saint Germain : 7.66%
 #   Barcelona : 5.88%
 #   Napoli : 5.15%
+#   Liverpool : 4.22%
+#   Juventus : 4.07%
+#   Real Madrid : 3.70%
+#   Tottenham : 3.30%
+#   Bayern Munich : 3.18%
+#   Chelsea : 2.87%
+#   Crotone : 2.65%
 
 # - Que pouvez-vous dire de ces individus ?
 # Réponse : ces individus sont parmi les plus performants et dominants en termes de performance offensive.
 
 # - Que peut-on dire de particulier sur l'équipe de Crotone ?
-# Réponse : Creton contribue à 2.65% sur l'axe 1.Ce qui est moyen Donc l'équipe semble avoir des performances offensives limitées
+# Réponse : Crotone contribue à 2.65% sur l'axe 1.Ce qui est moyen donc l'équipe semble avoir des performances offensives mais faibles
 
 # - Quelles sont les individus qui ont le plus contribué à créer l'axe 2 ? 
 # Réponse :
@@ -184,15 +194,20 @@ sort(round(foot_acp$ind$contrib[,2], 2), decreasing = TRUE)
 #   Brighton : 5.56
 #   Swansea : 5.25
 #   Leicester : 4.84
+#   Sevilla : 4.21%
+#   Burnley : 3.98%
+#   Stoke : 3.87%
+#   Getafe : 3.72%
+#   Newcastle United : 3.64%
 
 # - Que pouvez vous dire de Bournemouth ? De Schalke 04 ?
-# Réponse : Ces deux équipes ont un aspect très défensives et agressives
+# Réponse : Ces deux équipes ont un aspect très défensif et agressif
 
 plot(foot_acp, choix = "ind", axes = c(1,2), habillage = 16)
 # On a colorié les équipes en fonction de leur ligue.
 # Question : où se situent principalement les équipes anglaises ? Quelles conclusions peut-on en tirer ?
 # Réponse : Elles sont toutes du côté négatif de l'axe 2.
-# Conclusion : Les équipes anglaises recoivent très peu défensives et agressives
+# Conclusion : Les équipes anglaises sont moins défensives et moins agressives
 
 # On va maintenant faire la même chose pour les axes 3 et 4 
 plot(foot_acp, choix = "ind", axes = c(3,4), habillage = 16)
@@ -202,7 +217,7 @@ plot(foot_acp, choix = "var", axes = c(3,4))
 # Réponse : Elles se trouvent toutes du côté positif de l'axe 3
 
 # - Quelles conclusions peut-on en tirer ?
-# Réponse : Ces équipes sont douées dans les duels aériens, interception, mais sont trop sanctionnés par des cartons jaunes
+# Réponse : Ces équipes sont douées dans les duels aériens, interception, mais sont trop sanctionnés par des cartons jaunes et rouges
 #           D'autres vont jusqu'à être sanctionnées fréquemment par des cartons rouges
 
 # Où est Saint-Etienne sur le deuxième plan ? Que peut on dire de cette équipe ?
