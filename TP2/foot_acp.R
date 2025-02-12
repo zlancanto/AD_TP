@@ -147,14 +147,14 @@ foot_acp$var
 # - Quelles sont les variables qui ont le plus contribué à créer l'axe 1 ? l'axe 2 ? l'axe 3 ? l'axe 4?
 # Réponse : 
 #   - Axe 1 : Possession(14.77%), PassesReuss(13.66%), TirsCadres(13.49%), Buts(12.51%), Tirs(12.08%)
-#   - Axe 2 : Fautes(24.88%), FautesSubies(22.05%), Tacles(19.46%), Interception(10.21%), HorsJeu(9.79%)
-#   - Axe 3 : Jaune(25.89%), DuelsAeriens(18.64%), Interception(16.77%), Rouge(9.57%), Tacles(8.56%)
-#   - Axe 4 : Rouge(74.63%), Jaune(14.35%), Tacles(6.02%), FautesSubies(2.36%), HorsJeu(0.97%)
+#   - Axe 2 : Fautes(24.88%), FautesSubies(22.05%), Tacles(19.46%)
+#   - Axe 3 : Jaune(25.89%), DuelsAeriens(18.64%), Interception(16.77%)
+#   - Axe 4 : Rouge(74.63%) 
 
 # - Comment pouvez-vous intérpréter le premier axe factoriel ? le deuxième ?
 # Réponse : 
 #   - Axe 1 : Performance offensive
-#   - Axe 2 : Sanction, agressivité, défense
+#   - Axe 2 : Défense, agressivité
 
 
 # La commande 
@@ -162,25 +162,19 @@ foot_acp$ind
 # permet de récupérer les mêmes informations mais au niveau des individus.
 # Questions : 
 # - Quelles sont les individus qui ont le plus contribué à créer l'axe 1 ? 
-# Aide : sort(round(foot_acp$ind$contrib[,1], 2), decreasing = TRUE) trie les contributions du premier axe dans un vecteur
+# Aide : sort(round(foot_acp$ind$contrib[,1], 2)) trie les contributions du premier axe dans un vecteur
 # Réponse : 
 sort(round(foot_acp$ind$contrib[,1], 2), decreasing = TRUE)
 #   Manchester City : 8.47%
 #   Paris Saint Germain : 7.66%
 #   Barcelona : 5.88%
 #   Napoli : 5.15%
-#   Liverpool : 4.22%
-#   Juventus : 4.07%
-#   Real Madrid : 3.70%
-#   Tottenham : 3.30%
-#   Bayern Munich : 3.18%
-#   Chelsea : 2.87%
 
 # - Que pouvez-vous dire de ces individus ?
-# Réponse : ces individus sont parmi les plus performantes et dominantes en termes de performance offensive et de possession de balle.
+# Réponse : ces individus sont parmi les plus performants et dominants en termes de performance offensive.
 
 # - Que peut-on dire de particulier sur l'équipe de Crotone ?
-# Réponse : Creton contribue à 2.65% de l'axe 1.Ce qui quand même bien. Donc l'équipe semble avoir des performances offensives
+# Réponse : Creton contribue à 2.65% sur l'axe 1.Ce qui est moyen Donc l'équipe semble avoir des performances offensives limitées
 
 # - Quelles sont les individus qui ont le plus contribué à créer l'axe 2 ? 
 # Réponse :
@@ -192,13 +186,13 @@ sort(round(foot_acp$ind$contrib[,2], 2), decreasing = TRUE)
 #   Leicester : 4.84
 
 # - Que pouvez vous dire de Bournemouth ? De Schalke 04 ?
-# Réponse : Ces deux équipes ont un aspect défensif très agressif (fautes, cartons jaunes...)
+# Réponse : Ces deux équipes ont un aspect très défensives et agressives
 
 plot(foot_acp, choix = "ind", axes = c(1,2), habillage = 16)
 # On a colorié les équipes en fonction de leur ligue.
 # Question : où se situent principalement les équipes anglaises ? Quelles conclusions peut-on en tirer ?
 # Réponse : Elles sont toutes du côté négatif de l'axe 2.
-# Conclusion : Les équipes anglaises recoivent très peu de sanctions quand elles jouent
+# Conclusion : Les équipes anglaises recoivent très peu défensives et agressives
 
 # On va maintenant faire la même chose pour les axes 3 et 4 
 plot(foot_acp, choix = "ind", axes = c(3,4), habillage = 16)
@@ -208,15 +202,16 @@ plot(foot_acp, choix = "var", axes = c(3,4))
 # Réponse : Elles se trouvent toutes du côté positif de l'axe 3
 
 # - Quelles conclusions peut-on en tirer ?
-# Réponse : Ces équipes sont douées dans les duels aériens mais apparaissent trop agressives
+# Réponse : Ces équipes sont douées dans les duels aériens, interception, mais sont trop sanctionnés par des cartons jaunes
+#           D'autres vont jusqu'à être sanctionnées fréquemment par des cartons rouges
 
 # Où est Saint-Etienne sur le deuxième plan ? Que peut on dire de cette équipe ?
 # Réponse : Saint-Etienne se trouve du côté très négatif de l'axe 3, et du côté très positf de l'axe 4.
-#           Saint-Etienne étant trop isolé, il est probablement le fruit d'une mauvaise projection orthogonale susr ce plan
+#           Saint-Etienne est l'équipe qui a le plus de cartons rouges, mais aussi le moins de duels aériens et d'interceptions
 
 # Observez la position de Real Madrid et de Nantes sur ce deuxième plan. Peut-on alors dire que ces 
 # deux équipes se ressemblent ?
-# Réponse : Nantes et Real Madrid sont très proches. Cependant on ne peux ps affirmer qu'elles se ressemblent 
+# Réponse : Nantes et Real Madrid sont très proches. Cependant on ne peux pas affirmer qu'elles se ressemblent 
 # car les 2 composantes principales de ce plan sont correlés entre elles d'où le risque que les projections 
 # de ces points sur le plan soient mauvaises
 
