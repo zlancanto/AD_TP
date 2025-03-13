@@ -243,6 +243,5 @@ descrip2
 composition=tel[tel[,8] == 4, ]
 composition
 
-# - Comparaison : La composotion des classes est la même quelles que soient les méthodes utilisées 
-
+# - Comparaison : La composotion des classes est différente en fonction de la méthode utilisée 
   
